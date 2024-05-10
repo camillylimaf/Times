@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informações dos Times de Esportes</title>
+<link rel="stylesheet" href="style.css"> 
+
+</head>
+<body>
+<h1>Informações dos Times de Esportes</h1>
+<div>
+    <h2>Exibir informações de acordo com a cor predominante</h2>
+    <label for="corPredominante">Escolha uma cor predominante:</label>
+    <select id="corPredominante">
+      <option value="vermelho">Vermelho</option>
+      <option value="azul">Azul</option>
+      <option value="preto">Preto</option>
+    </select>
+    <button onclick="exibirInformacoes()">Mostrar</button>
+  </div>
+<div id="output"></div>
+
+<div>
+  <pre id="arrayOutput"></pre>
+</div>
+
+
+
+<script>
+// Array com informações dos times
+var times = [
+    { modalidade: "Futebol Americano", nome: "Kansas City Chiefs", jogadores: 11, cor: "vermelho", brasao: "chiefs.png" },
+    { modalidade: "Futebol", nome: "Santos", jogadores: 12, cor: "preto", brasao: "Santos.png" },
+    { modalidade: "Futebol", nome: "Real Madrid", jogadores: 6, cor: "azul", brasao: "realmadrid.webp" }
+];
+
+// Função para exibir array com todas as informações
+function exibirArray() {
+    var arrayOutput = document.getElementById("arrayOutput");
+    arrayOutput.textContent = JSON.stringify(times, null, 2);
+}
+
+// Função para exibir informações dos times de acordo com a cor predominante escolhida
+function exibirInformacoes() {
+    var corPredominante = document.getElementById("corPredominante").value;
+    var outputDiv = document.getElementById("output");
+    outputDiv.innerHTML = ""; // Limpa o conteúdo anterior
+
+    times.forEach(function(time) {
+        if (time.cor.toLowerCase() === corPredominante.toLowerCase()) {
+            var elementoTime = document.createElement("div");
+
+            elementoTime.innerHTML = "<p>Modalidade: " + time.modalidade + "</p>" +
+                                     "<p>Time: " + time.nome + "</p>" +
+                                     "<p>Quantidade de jogadores: " + time.jogadores + "</p>" +
+                                     "<img src='" + time.brasao + "' alt='Brasão do time'>";
+
+            outputDiv.appendChild(elementoTime);
+        }
+    });
+}
+
+
+</script>
+
+</body>
+</html>
